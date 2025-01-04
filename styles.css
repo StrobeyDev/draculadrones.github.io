@@ -759,4 +759,19 @@ main {
 
 .home-link:hover {
     color: var(--blood-red);  /* Change color on hover */
+}
+
+/* Make the header link styles more specific */
+.header-gothic h1 .home-link {
+    color: var(--moonlight);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    /* Preserve the header text styling */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-gothic h1 .home-link:hover {
+    color: var(--blood-red);
 } 
