@@ -1199,6 +1199,7 @@ a:focus, button:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .lightbox-title {
@@ -1213,5 +1214,24 @@ a:focus, button:focus {
     border-radius: 8px;
     border: 1px solid var(--blood-red);
     min-width: 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* View Progress button styling */
+.view-house {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--vampire-red);
+    color: var(--moonlight);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--blood-red);
+    margin-top: 0.5rem;
+}
+
+.view-house:hover {
+    background-color: var(--blood-red);
+    transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
