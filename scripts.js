@@ -33,4 +33,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 el.textContent = 'Status: Error loading';
             });
         });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const imgSrc = item.querySelector('img').src;
+            const imgAlt = item.querySelector('img').alt;
+            lightboxImg.src = imgSrc;
+            lightboxImg.alt = imgAlt;
+            lightbox.classList.add('active');
+        });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
 }); 
