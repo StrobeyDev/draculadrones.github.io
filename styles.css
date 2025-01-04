@@ -291,6 +291,22 @@ main {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.9rem;
+    position: relative;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--blood-red);
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
 }
 
 @media (max-width: 576px) {
@@ -483,6 +499,9 @@ main {
     overflow: hidden;
     border: 1px solid var(--blood-red);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .project-card:hover {
@@ -601,6 +620,9 @@ main {
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);  /* Smooth transition */
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .drone-card:hover {
@@ -1005,4 +1027,14 @@ html {
 a:focus, button:focus {
     outline: 2px solid var(--blood-red);
     outline-offset: 2px;
+}
+
+/* Make text selection match theme */
+::selection {
+    background-color: var(--blood-red);
+    color: var(--moonlight);
+}
+
+.project-info p, .drone-info p {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
