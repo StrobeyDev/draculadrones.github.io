@@ -62,6 +62,21 @@ footer {
     margin-top: 2rem;
     width: 100%;
     border-top: 3px solid var(--blood-red);
+    box-sizing: border-box;
+}
+
+footer p {
+    margin: 0;
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+@media (max-width: 576px) {
+    footer p {
+        font-size: 0.85rem;
+    }
 }
 
 .info-container {
