@@ -64,17 +64,36 @@ footer {
 
 .build-info {
     background-color: var(--fog-gray);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
     border: 1px solid var(--blood-red);
+    position: relative;
+    overflow: hidden;
+}
+
+.build-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+        var(--blood-red) 0%,
+        var(--vampire-red) 50%,
+        var(--blood-red) 100%
+    );
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
 }
 
 .build-info h2 {
     color: var(--blood-red);
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--vampire-red);
-    padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .info-grid {
@@ -86,9 +105,15 @@ footer {
 
 .info-item {
     background-color: var(--night-black);
-    padding: 1rem;
-    border-radius: 6px;
+    padding: 1.5rem;
+    border-radius: 8px;
     border: 1px solid var(--vampire-red);
+    transition: transform 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 0, 0, 0.2);
 }
 
 .info-item h3 {
@@ -155,17 +180,28 @@ main {
 .timeline-nav ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     margin: 0;
     padding: 0;
     width: 100%;
+    max-width: 800px;
 }
 
 .timeline-nav li {
-    padding: 0;
-    border-radius: 4px;
+    flex: 0 1 auto;
+    min-width: 150px;
+    text-align: center;
+}
+
+.timeline-nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--moonlight);
+    text-decoration: none;
     transition: background-color 0.3s;
+    border-radius: 4px;
 }
 
 .timeline-nav li:hover {
@@ -174,14 +210,6 @@ main {
 
 .timeline-nav li.active {
     background-color: var(--vampire-red);
-}
-
-.timeline-nav a {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
 }
 
 @media (max-width: 576px) {
@@ -410,12 +438,11 @@ main {
 
 /* Add these styles for the project cards and images */
 .project-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    padding: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 600px;  /* Keep cards at a readable width */
+    margin: 0 auto;    /* Center the cards */
 }
 
 .project-card {
@@ -426,12 +453,14 @@ main {
     flex-direction: column;
     overflow: hidden;
     border: 1px solid var(--blood-red);
-    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(139, 0, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(139, 0, 0, 0.2),
+                0 0 8px rgba(220, 20, 60, 0.1);
+    border-color: var(--blood-red);
 }
 
 .project-card img {
@@ -440,7 +469,7 @@ main {
     object-fit: contain;
     background-color: var(--fog-gray);
     padding: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
     margin-top: 0;
 }
 
@@ -508,32 +537,6 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-link {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--night-black);
-    color: var(--moonlight);
-    text-decoration: none;
-    border: 2px solid var(--blood-red);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.social-link:hover {
-    background-color: var(--blood-red);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
 @media (max-width: 576px) {
     .social-links {
         flex-direction: column;
@@ -555,10 +558,11 @@ main {
 /* Add these styles for the drone cards */
 .drone-cards {
     display: grid;
-    grid-template-columns: repeat(2, 250px);
+    grid-template-columns: repeat(auto-fit, 250px);  /* Auto-fit columns of 250px */
     gap: 2rem;
     justify-content: center;
     margin: 1.5rem auto;
+    max-width: 1200px;  /* Limit maximum width */
 }
 
 .drone-card {
@@ -586,9 +590,15 @@ main {
     max-height: 80%;
 }
 
+@media (max-width: 992px) {
+    .drone-cards {
+        grid-template-columns: repeat(2, 250px);  /* 2 columns on medium screens */
+    }
+}
+
 @media (max-width: 768px) {
     .drone-cards {
-        grid-template-columns: 250px;
+        grid-template-columns: 250px;  /* Single column on mobile */
     }
 }
 
@@ -663,10 +673,11 @@ main {
 /* Clean up and simplify drone card styles - remove duplicates */
 .drone-cards {
     display: grid;
-    grid-template-columns: repeat(2, 250px);  /* Force exactly 2 columns */
+    grid-template-columns: repeat(auto-fit, 250px);  /* Auto-fit columns of 250px */
     gap: 2rem;
-    justify-content: center;  /* Center the grid */
+    justify-content: center;
     margin: 1.5rem auto;
+    max-width: 1200px;  /* Limit maximum width */
 }
 
 .drone-card {
@@ -692,6 +703,12 @@ main {
     height: auto;       /* Let the image size itself */
     max-width: 80%;     /* Constrain maximum size */
     max-height: 80%;    /* Constrain maximum size */
+}
+
+@media (max-width: 992px) {
+    .drone-cards {
+        grid-template-columns: repeat(2, 250px);  /* 2 columns on medium screens */
+    }
 }
 
 @media (max-width: 768px) {
@@ -789,12 +806,37 @@ main {
     border-radius: 12px;
     border: 1px solid var(--blood-red);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+        var(--blood-red) 0%,
+        var(--vampire-red) 50%,
+        var(--blood-red) 100%
+    );
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
 }
 
 .contact-content p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
     color: var(--moonlight);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .home-link {
@@ -851,4 +893,31 @@ header h1 a:hover {
 .header-gothic nav {
     position: relative;
     z-index: 2;
+}
+
+.section-intro {
+    color: var(--moonlight);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    opacity: 0.9;
+}
+
+.project-info h3 {
+    color: var(--blood-red);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.project-status {
+    color: var(--blood-red);
+    font-weight: 500;
+    margin: 0.5rem 0;
+    border-left: 3px solid var(--blood-red);
+    padding-left: 0.5rem;
+}
+
+.project-info p {
+    margin: 0.5rem 0;
 }
