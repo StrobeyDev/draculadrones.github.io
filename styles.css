@@ -142,6 +142,9 @@ main {
 }
 
 .timeline-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--fog-gray);
     padding: 1rem;
     margin-top: 1rem;
@@ -154,8 +157,9 @@ main {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    max-width: 892px;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 .timeline-nav li {
@@ -247,28 +251,35 @@ main {
 
 /* Gothic Decorative Elements */
 .header-gothic {
-    position: relative;
-    padding-top: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
 }
 
-.header-gothic::before,
-.header-gothic::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 40px;
-    height: 60px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 60"><path d="M20 0L40 20L20 40L0 20L20 0Z" fill="%23DC143C"/><path d="M20 20L40 40L20 60L0 40L20 20Z" fill="%238B0000"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
+.header-gothic h1 {
+    margin: 0;
+    color: var(--moonlight);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.header-gothic::before {
-    left: 20px;
+.main-nav {
+    width: 100%;
+    max-width: 892px;
+    margin: 0 auto;
 }
 
-.header-gothic::after {
-    right: 20px;
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+    padding: 0;
 }
 
 /* Romanian Pattern Border */
@@ -774,4 +785,27 @@ main {
 
 .header-gothic h1 .home-link:hover {
     color: var(--blood-red);
-} 
+}
+
+/* Remove all previous home-link styles */
+header h1 a {
+    color: inherit;  /* Takes color from parent h1 */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header h1 a:hover {
+    color: var(--blood-red);
+}
+
+.timeline-label {
+    color: var(--moonlight);
+    margin: 0.5rem 0 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    display: block;
+}
