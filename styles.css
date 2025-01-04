@@ -256,18 +256,53 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem;
+    background: linear-gradient(180deg, 
+                var(--vampire-red) 0%,
+                var(--night-black) 100%);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-gothic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(45deg,
+            rgba(0,0,0,0.1) 0,
+            rgba(0,0,0,0.1) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    opacity: 0.3;
+    z-index: 1;
 }
 
 .header-gothic h1 {
-    margin: 0;
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
     color: var(--moonlight);
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.tagline {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-style: italic;
+    margin-bottom: 1.5rem;
 }
 
 .main-nav {
+    position: relative;
+    z-index: 2;
     width: 100%;
     max-width: 892px;
     margin: 0 auto;
@@ -808,4 +843,12 @@ header h1 a:hover {
     letter-spacing: 1px;
     width: 100%;
     display: block;
+}
+
+/* Make sure all header content is above the pattern */
+.header-gothic h1,
+.header-gothic .tagline,
+.header-gothic nav {
+    position: relative;
+    z-index: 2;
 }
