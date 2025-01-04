@@ -1,3 +1,10 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --vampire-red: #8B0000;
     --blood-red: #DC143C;
@@ -39,7 +46,8 @@ header h1 {
 }
 
 .model-viewer {
-    width: 892px;
+    width: 100%;
+    max-width: 892px;
     height: 500px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -193,6 +201,9 @@ main {
     flex: 0 1 auto;
     min-width: 150px;
     text-align: center;
+    border: 1px solid var(--blood-red);
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
 .timeline-nav a {
@@ -206,10 +217,13 @@ main {
 
 .timeline-nav li:hover {
     background-color: var(--blood-red);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-nav li.active {
     background-color: var(--vampire-red);
+    border-color: var(--vampire-red);
 }
 
 @media (max-width: 576px) {
@@ -571,6 +585,20 @@ main {
     border: 1px solid var(--blood-red);
     border-radius: 8px;
     overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);  /* Smooth transition */
+}
+
+.drone-card:hover {
+    transform: translateY(-8px);  /* Lift effect */
+    box-shadow: 0 12px 24px rgba(139, 0, 0, 0.2),
+                0 0 8px rgba(220, 20, 60, 0.1);  /* Red glow */
+    border-color: var(--blood-red);
+}
+
+/* Optional: Add subtle zoom effect to the equipment images on hover */
+.drone-card:hover img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
 }
 
 .img-container {
@@ -604,22 +632,20 @@ main {
 
 /* Add styles for the profile image */
 .profile-img {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-    background-color: var(--fog-gray);
-    padding: 1rem;
-    border-bottom: 2px solid var(--blood-red);
-    margin-bottom: 1rem;
+    width: 200px;  /* Fixed width */
+    height: 200px;  /* Fixed height for perfect circle */
+    object-fit: cover;  /* Makes image fill the circle */
+    border-radius: 50%;  /* Make it circular */
+    border: 2px solid var(--blood-red);
+    padding: 0;
+    margin: 1rem 0 2rem 0;
+    background-color: transparent;
 }
 
 @media (max-width: 768px) {
-    .drone-cards {
-        grid-template-columns: 1fr;
-    }
-    
-    .drone-card {
-        width: 100%;
+    .profile-img {
+        width: 150px;
+        height: 150px;
     }
 }
 
@@ -636,12 +662,12 @@ main {
 .profile-img {
     width: 200px;  /* Fixed width */
     height: 200px;  /* Fixed height for perfect circle */
-    object-fit: cover;  /* Changed from contain to cover */
+    object-fit: cover;  /* Makes image fill the circle */
     border-radius: 50%;  /* Make it circular */
     border: 2px solid var(--blood-red);
-    padding: 0;  /* Remove padding */
+    padding: 0;
     margin: 1rem 0 2rem 0;
-    background-color: transparent;  /* Remove background color */
+    background-color: transparent;
 }
 
 /* Update the about grid layout */
@@ -920,4 +946,48 @@ header h1 a:hover {
 
 .project-info p {
     margin: 0.5rem 0;
+}
+
+/* Update container styles */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;  /* Add padding instead of overflowing */
+    box-sizing: border-box;  /* Include padding in width calculation */
+}
+
+/* Ensure all images are contained */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.project-status:contains("Loading...") {
+    animation: pulse 1.5s infinite;
+    color: var(--vampire-red);
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a:focus, button:focus {
+    outline: 2px solid var(--blood-red);
+    outline-offset: 2px;
 }
