@@ -1,0 +1,8 @@
+{
+    "house1": {
+        "path": "houses/house1/houses.json"
+    },
+    "sample2": {
+        "path": "houses/sample2/houses.json"
+    }
+} 
