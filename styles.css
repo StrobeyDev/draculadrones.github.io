@@ -1,0 +1,752 @@
+:root {
+    --vampire-red: #8B0000;
+    --blood-red: #DC143C;
+    --night-black: #1A1A1A;
+    --fog-gray: #2C2C2C;
+    --moonlight: #E6E6E6;
+}
+
+body {
+    font-family: 'Gothic', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--night-black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--moonlight);
+}
+
+header {
+    background-color: var(--vampire-red);
+    color: var(--moonlight);
+    text-align: center;
+    padding: 1.5rem;
+    border-bottom: 3px solid var(--blood-red);
+}
+
+header h1 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.viewer-container {
+    max-width: 892px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.model-viewer {
+    width: 892px;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--blood-red);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--vampire-red);
+    color: var(--moonlight);
+    margin-top: 2rem;
+    width: 100%;
+    border-top: 3px solid var(--blood-red);
+}
+
+.info-container {
+    max-width: 892px;
+    margin: 2rem auto 1rem;
+    padding: 0 1rem;
+}
+
+.build-info {
+    background-color: var(--fog-gray);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--blood-red);
+}
+
+.build-info h2 {
+    color: var(--blood-red);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--vampire-red);
+    padding-bottom: 0.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    background-color: var(--night-black);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--vampire-red);
+}
+
+.info-item h3 {
+    color: var(--blood-red);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-item p {
+    color: var(--moonlight);
+    font-weight: 500;
+}
+
+.build-notes {
+    background-color: var(--night-black);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--vampire-red);
+}
+
+.build-notes h3 {
+    color: var(--blood-red);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.build-notes p {
+    line-height: 1.6;
+    color: var(--moonlight);
+}
+
+@media (max-width: 992px) {
+    .model-viewer {
+        width: 100%;
+        height: 400px;
+    }
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+main {
+    flex: 1;
+    margin-bottom: 2rem;
+}
+
+.timeline-nav {
+    background-color: var(--fog-gray);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-top: 2px solid var(--blood-red);
+    border-bottom: 2px solid var(--blood-red);
+}
+
+.timeline-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 892px;
+    margin: 0 auto;
+}
+
+.timeline-nav li {
+    padding: 0;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.timeline-nav li:hover {
+    background-color: var(--blood-red);
+}
+
+.timeline-nav li.active {
+    background-color: var(--vampire-red);
+}
+
+.timeline-nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@media (max-width: 576px) {
+    .timeline-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .timeline-nav li {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 892px;
+    margin: 1rem auto 0;
+}
+
+.main-nav li {
+    padding: 0;
+    border-radius: 8px;
+    background-color: var(--night-black);
+    border: 2px solid var(--blood-red);
+    transition: all 0.3s ease;
+}
+
+.main-nav li:hover {
+    background-color: var(--blood-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.main-nav li.active {
+    background-color: var(--blood-red);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.main-nav a {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: var(--moonlight);
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .main-nav li {
+        width: 200px;
+        text-align: center;
+    }
+}
+
+/* Gothic Decorative Elements */
+.header-gothic {
+    position: relative;
+    padding-top: 2rem;
+}
+
+.header-gothic::before,
+.header-gothic::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 60"><path d="M20 0L40 20L20 40L0 20L20 0Z" fill="%23DC143C"/><path d="M20 20L40 40L20 60L0 40L20 20Z" fill="%238B0000"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.header-gothic::before {
+    left: 20px;
+}
+
+.header-gothic::after {
+    right: 20px;
+}
+
+/* Romanian Pattern Border */
+.pattern-border {
+    position: relative;
+    border: none;
+    padding: 20px;
+}
+
+.pattern-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0 0L10 10L20 0L30 10L40 0L50 10L60 0L70 10L80 0L90 10L100 0" stroke="%23DC143C" fill="none"/></svg>');
+    background-size: 100px 10px;
+    background-repeat: repeat-x;
+    opacity: 0.7;
+}
+
+.about-card {
+    background-color: var(--fog-gray);
+    padding: 2rem;
+    border-radius: 12px;
+    position: relative;
+    margin: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-card::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid var(--blood-red);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+/* Section Headers with Gothic Style */
+.gothic-header {
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+}
+
+.gothic-header h2 {
+    position: relative;
+    display: inline-block;
+    padding: 0 3rem;
+}
+
+.gothic-header h2::before,
+.gothic-header h2::after {
+    content: '❖';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--blood-red);
+    font-size: 1.2em;
+}
+
+.gothic-header h2::before {
+    left: 0;
+}
+
+.gothic-header h2::after {
+    right: 0;
+}
+
+/* Add these styles for the view progress button */
+.view-project {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--night-black);
+    color: var(--moonlight);
+    text-decoration: none;
+    border: 2px solid var(--blood-red);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.view-project:hover {
+    background-color: var(--blood-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Add these styles for the project cards and images */
+.project-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.project-card {
+    position: relative;
+    background-color: var(--fog-gray);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--blood-red);
+    z-index: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(139, 0, 0, 0.2);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: var(--fog-gray);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    margin-top: 0;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+.project-info {
+    position: relative;
+    z-index: 2;
+    background-color: var(--fog-gray);
+    padding: 1.5rem;
+    border-top: 2px solid var(--blood-red);
+}
+
+.project-info p {
+    margin: 0.5rem 0;
+    color: var(--moonlight);
+}
+
+.project-info h3 {
+    color: var(--blood-red);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .project-cards {
+        grid-template-columns: 1fr;
+        padding: 0.5rem;
+    }
+    
+    .project-card img {
+        height: 200px;
+    }
+}
+
+/* Update the contact section styles */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--night-black);
+    color: var(--moonlight);
+    text-decoration: none;
+    border: 2px solid var(--blood-red);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.contact-button:hover {
+    background-color: var(--blood-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--night-black);
+    color: var(--moonlight);
+    text-decoration: none;
+    border: 2px solid var(--blood-red);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.social-link:hover {
+    background-color: var(--blood-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 576px) {
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .social-link {
+        width: 200px;
+        text-align: center;
+    }
+    
+    .contact-button {
+        width: 200px;
+        text-align: center;
+    }
+}
+
+/* Add these styles for the drone cards */
+.drone-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    gap: 2rem;
+    justify-content: center;
+    margin: 1.5rem auto;
+}
+
+.drone-card {
+    width: 250px;
+    background-color: var(--night-black);
+    border: 1px solid var(--blood-red);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.img-container {
+    width: 250px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--fog-gray);
+    border-bottom: 2px solid var(--blood-red);
+}
+
+.drone-card img {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+@media (max-width: 768px) {
+    .drone-cards {
+        grid-template-columns: 250px;
+    }
+}
+
+/* Add styles for the profile image */
+.profile-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: var(--fog-gray);
+    padding: 1rem;
+    border-bottom: 2px solid var(--blood-red);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .drone-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .drone-card {
+        width: 100%;
+    }
+}
+
+/* Update the About Me card styles */
+.about-card:first-child {  /* Target specifically the About Me card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 600px;  /* Limit the width */
+    margin: 1rem auto;  /* Center the card */
+}
+
+.profile-img {
+    width: 200px;  /* Fixed width */
+    height: 200px;  /* Fixed height for perfect circle */
+    object-fit: cover;  /* Changed from contain to cover */
+    border-radius: 50%;  /* Make it circular */
+    border: 2px solid var(--blood-red);
+    padding: 0;  /* Remove padding */
+    margin: 1rem 0 2rem 0;
+    background-color: transparent;  /* Remove background color */
+}
+
+/* Update the about grid layout */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;  /* Stack cards vertically */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-card:not(:first-child) {  /* Style for other about cards */
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+@media (max-width: 768px) {
+    .profile-img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Update the Equipment section width */
+.about-card:last-child {  /* Equipment section */
+    max-width: 1200px;  /* Increased from 1000px */
+}
+
+/* Clean up and simplify drone card styles - remove duplicates */
+.drone-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 250px);  /* Force exactly 2 columns */
+    gap: 2rem;
+    justify-content: center;  /* Center the grid */
+    margin: 1.5rem auto;
+}
+
+.drone-card {
+    width: 250px;
+    background-color: var(--night-black);
+    border: 1px solid var(--blood-red);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.img-container {
+    width: 250px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--fog-gray);
+    border-bottom: 2px solid var(--blood-red);
+}
+
+.drone-card img {
+    width: auto;        /* Let the image size itself */
+    height: auto;       /* Let the image size itself */
+    max-width: 80%;     /* Constrain maximum size */
+    max-height: 80%;    /* Constrain maximum size */
+}
+
+@media (max-width: 768px) {
+    .drone-cards {
+        grid-template-columns: 250px;  /* Single column on mobile */
+    }
+}
+
+/* Add styles for the drone info text */
+.drone-info {
+    padding: 1.5rem;
+}
+
+.drone-info h3 {
+    color: var(--blood-red);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.drone-info p {
+    color: var(--moonlight);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Update the project image link styles */
+.project-image-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    background-color: var(--fog-gray);
+    transition: opacity 0.3s ease;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.project-image-link img {
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin: 0;
+    transform-origin: center;
+}
+
+.project-info {
+    position: relative;
+    z-index: 2;
+    background-color: var(--fog-gray);
+    padding: 1.5rem;
+    border-top: 2px solid var(--blood-red);
+}
+
+/* Add styles for the project title */
+.project-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--blood-red);
+}
+
+.project-title h1 {
+    color: var(--blood-red);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.project-subtitle {
+    color: var(--moonlight);
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .project-title h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Add styles for the contact section */
+.contact {
+    max-width: 892px;
+    margin: 2rem auto;
+}
+
+.contact-content {
+    background-color: var(--fog-gray);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--blood-red);
+    text-align: center;
+}
+
+.contact-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--moonlight);
+} 
