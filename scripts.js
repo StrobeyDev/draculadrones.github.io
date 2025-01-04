@@ -54,9 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get the clicked image's source and alt text
             const imgSrc = item.querySelector('img').src;
             const imgAlt = item.querySelector('img').alt;
+            const imgTitle = item.querySelector('.gallery-title').textContent;
             // Update and show the lightbox
             lightboxImg.src = imgSrc;
             lightboxImg.alt = imgAlt;
+            lightbox.querySelector('.lightbox-title').textContent = imgTitle;
             lightbox.classList.add('active');
         });
     });
