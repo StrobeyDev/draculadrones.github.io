@@ -1,25 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetch('project-status.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Loaded data:', data); // Debug log
-            Object.keys(data).forEach(projectId => {
-                const statusElement = document.querySelector(`#${projectId} .project-status`);
-                if (statusElement) {
-                    statusElement.textContent = `Status: ${data[projectId].currentPhase}`;
-                } else {
-                    console.log(`Element not found for project: ${projectId}`); // Debug log
-                }
+        .then(response => response.json())
+        .then(projects => {
+            Object.keys(projects).forEach(projectId => {
+                fetch(projects[projectId].path)
+                    .then(response => response.json())
+                    .then(projectData => {
+                        const card = document.querySelector(`#${projectId}`);
+                        if (card) {
+                            // Update status
+                            const statusElement = card.querySelector('.project-status');
+                            if (statusElement) {
+                                statusElement.textContent = `Status: ${projectData.currentPhase}`;
+                            }
+                            
+                            // Update links
+                            const links = card.querySelectorAll('a');
+                            links.forEach(link => {
+                                if (link.classList.contains('project-image-link') || 
+                                    link.classList.contains('view-project')) {
+                                    link.href = `projects/${projectId}/updates/${projectData.latestUpdate}`;
+                                }
+                            });
+                        }
+                    });
             });
         })
         .catch(error => {
             console.error('Error loading project statuses:', error);
-            // Show error in status
             const statusElements = document.querySelectorAll('.project-status');
             statusElements.forEach(el => {
                 el.textContent = 'Status: Error loading';
