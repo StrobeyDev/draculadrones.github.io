@@ -1,0 +1,9 @@
+# robots.txt for draculadrones.com
+User-agent: *
+Allow: /
+Sitemap: https://draculadrones.com/sitemap.xml
+
+# Prevent access to any sensitive directories (if you add them later)
+Disallow: /private/
+Disallow: /admin/
+Disallow: /client-login/ 

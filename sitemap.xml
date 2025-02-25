@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Main pages -->
+    <url>
+        <loc>https://draculadrones.com/</loc>
+        <lastmod>2024-03-22</lastmod>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://draculadrones.com/houses.html</loc>
+        <lastmod>2024-03-22</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Project updates -->
+    <url>
+        <loc>https://draculadrones.com/houses/house1/updates/2024-03-22-framing.html</loc>
+        <lastmod>2024-03-22</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://draculadrones.com/houses/house1/updates/2024-03-15-foundation.html</loc>
+        <lastmod>2024-03-15</lastmod>
+        <priority>0.6</priority>
+    </url>
+</urlset> 
