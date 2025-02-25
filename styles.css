@@ -370,10 +370,18 @@ main {
 }
 
 .tagline {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    font-style: italic;
-    margin-bottom: 1.5rem;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 
+        slideIn 6s linear;
+    max-width: fit-content;
+}
+
+/* Slide in animation for tagline */
+@keyframes slideIn {
+    from { width: 0 }
+    to { width: 100% }
 }
 
 .main-nav {

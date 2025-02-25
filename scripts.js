@@ -74,4 +74,18 @@ document.addEventListener('DOMContentLoaded', function() {
             lightbox.classList.remove('active');
         }
     });
+});
+
+// Typing animation reset
+document.addEventListener('DOMContentLoaded', function() {
+    const tagline = document.querySelector('.tagline');
+    tagline.addEventListener('animationend', function(e) {
+        if (e.animationName === 'typing') {
+            setTimeout(() => {
+                tagline.style.animation = 'none';
+                tagline.offsetHeight; // Trigger reflow
+                tagline.style.animation = null;
+            }, 4000); // Wait 4 seconds before restarting
+        }
+    });
 }); 
