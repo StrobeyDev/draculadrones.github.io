@@ -4,6 +4,19 @@
  */
 
 /**
+ * Add event listener for Enter key on password input
+ */
+window.addEventListener('load', function() {
+    const passwordInput = document.getElementById('project-password');
+    passwordInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkPassword();
+        }
+    });
+});
+
+/**
  * Validates the entered password against stored keys
  * Shows/hides content based on validation result
  */
