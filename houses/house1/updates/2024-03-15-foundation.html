@@ -14,6 +14,9 @@
     <meta name="twitter:image" content="https://draculadrones.com/images/updates/house1/2024-03-15/FoundationAngle.jpeg">
     <!-- Link to main stylesheet -->
     <link rel="stylesheet" href="../../../styles.css">
+    <script src="../../../js/config.js"></script>
+    <script src="../../../js/password-protection.js"></script>
+    <script src="../../../scripts.js"></script>
 </head>
 <body>
     <!-- Header section with navigation -->
@@ -98,6 +101,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="password-container">
+            <h2>Protected Project</h2>
+            <p>Please enter the password to view this project:</p>
+            <div class="password-input-container">
+                <input type="password" id="project-password" />
+                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                    <span class="eye-icon">👁️</span>
+                </button>
+            </div>
+            <button onclick="checkPassword()">Submit</button>
+            <p id="password-error" class="error-message"></p>
+        </div>
     </main>
 
     <footer>
@@ -112,8 +128,5 @@
             <img src="" alt="">
         </div>
     </div>
-
-    <!-- Load JavaScript file -->
-    <script src="../../../scripts.js"></script>
 </body>
 </html> 

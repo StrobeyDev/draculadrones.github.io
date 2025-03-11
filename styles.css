@@ -1,17 +1,32 @@
+/* ==========================================================================
+   Table of Contents:
+   1. Variables & Global Styles
+   2. Header & Navigation
+   3. Hero Section
+   4. About Section & Cards
+   5. Equipment Cards
+   6. Project Updates & Gallery
+   7. Contact Section
+   8. Animations & Effects
+   9. Media Queries
+   ========================================================================== */
+
+/* 1. Variables & Global Styles
+   ========================================================================== */
+:root {
+    --blood-red: #8B0000;
+    --vampire-red: #600000;
+    --moonlight: #F8F8FF;
+    --fog-gray: #1C1C1C;
+    --night-black: #0A0A0A;
+}
+
 html, body {
     max-width: 100%;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
     min-height: 100vh;
-}
-
-:root {
-    --vampire-red: #8B0000;
-    --blood-red: #DC143C;
-    --night-black: #1A1A1A;
-    --fog-gray: #2C2C2C;
-    --moonlight: #E6E6E6;
 }
 
 body {
@@ -1275,4 +1290,112 @@ a:focus, button:focus {
         transform: scale(0.3) translateY(20px);
         opacity: 0;
     }
+}
+
+/* Password Protection Styles */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--night-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.password-container {
+    background: var(--fog-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--blood-red);
+    text-align: center;
+}
+
+.password-input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    width: 24px;
+    height: 24px;
+    color: var(--blood-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye-icon {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    opacity: 0.8;
+}
+
+.password-container input {
+    padding: 0.5rem;
+    margin: 1rem 0;
+    width: 200px;
+    padding-right: 32px;
+    background: var(--moonlight);
+    border: 1px solid var(--blood-red);
+}
+
+.password-container button {
+    padding: 0.5rem 1rem;
+    background: var(--vampire-red);
+    color: var(--moonlight);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: var(--blood-red);
+    margin-top: 1rem;
+}
+
+.protected-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--fog-gray);
+    color: var(--moonlight);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--blood-red);
+    font-size: 0.9rem;
+}
+
+.open-image-btn {
+    background: var(--vampire-red);
+    color: var(--moonlight);
+    border: 1px solid var(--blood-red);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.open-image-btn:hover {
+    background: var(--blood-red);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

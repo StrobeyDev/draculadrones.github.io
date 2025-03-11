@@ -1,6 +1,11 @@
+/**
+ * Main JavaScript functionality for the Dracula Drones website
+ * Handles house status updates, image gallery, and animations
+ */
+
 // When the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Fetch the main house data file
+    // Fetch and update house statuses from JSON data
     fetch('house.json')
         .then(response => response.json())
         .then(projects => {
@@ -41,12 +46,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
-// Lightbox functionality
+/**
+ * Image Gallery Lightbox Functionality
+ * - Opens images in a modal overlay
+ * - Displays image title
+ * - Provides full-size image access
+ * - Closes on overlay/X click
+ */
 document.addEventListener('DOMContentLoaded', function() {
     // Get references to lightbox elements
     const lightbox = document.querySelector('.lightbox');
     const lightboxImg = lightbox.querySelector('img');
     const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
+    const openImageBtn = lightbox.querySelector('.open-image-btn');
 
     // Add click handlers to all gallery images
     document.querySelectorAll('.gallery-item').forEach(item => {
@@ -58,8 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update and show the lightbox
             lightboxImg.src = imgSrc;
             lightboxImg.alt = imgAlt;
-            lightbox.querySelector('.lightbox-title').textContent = imgTitle;
+            lightboxTitle.textContent = imgTitle;
             lightbox.classList.add('active');
+            // Update the open in new tab button
+            openImageBtn.onclick = () => window.open(imgSrc, '_blank');
         });
     });
 
@@ -76,7 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Typing animation reset
+/**
+ * Typing Animation Reset
+ * Resets the tagline typing animation every 4 seconds
+ * for continuous effect on the homepage
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const tagline = document.querySelector('.tagline');
     tagline.addEventListener('animationend', function(e) {

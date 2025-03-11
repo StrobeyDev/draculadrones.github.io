@@ -17,106 +17,125 @@
     <meta name="twitter:image" content="https://draculadrones.com/images/updates/house1/2024-03-22/RoofAngle.jpeg">
     <!-- Link to main stylesheet -->
     <link rel="stylesheet" href="../../../styles.css">
+    <script src="../../../js/config.js"></script>
+    <script src="../../../js/password-protection.js"></script>
+    <script src="../../../scripts.js"></script>
 </head>
 <body>
-    <!-- Header section with navigation -->
-    <header class="header-gothic">
-        <h1>123 Vampire Street</h1>
-        <!-- Main navigation menu -->
-        <nav class="main-nav">
-            <ul>
-                <li><a href="../../../index.html">Home</a></li>
-                <li class="active"><a href="../../../houses.html">Houses</a></li>
-                <li><a href="../../../index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <!-- Timeline navigation for build updates -->
-        <nav class="timeline-nav">
-            <p class="timeline-label">Build Dates</p>
-            <ul>
-                <li><a href="2024-03-15-foundation.html">March 15, 2024</a></li>
-                <li class="active"><a href="2024-03-22-framing.html">March 22, 2024</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <!-- Main content with fade-in animation -->
-    <main class="fade-in">
-        <!-- Build information section -->
-        <div class="info-container">
-            <div class="build-info">
-                <h2>Build Progress Update</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h3>Scan Date</h3>
-                        <p>March 22, 2024</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Construction Phase</h3>
-                        <p data-construction-phase>Frame Installation</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Next Milestone</h3>
-                        <p>Roof Installation - Expected April 5</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Weather Conditions</h3>
-                        <p>Partly Cloudy, 20°C</p>
-                    </div>
-                </div>
-                <div class="build-notes">
-                    <h3>Progress Notes</h3>
-                    <p>Frame installation completed ahead of schedule. Electrical and plumbing rough-in to begin next week. All materials for upcoming work have been delivered to site.</p>
-                </div>
+    <!-- Password overlay -->
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-container">
+            <h2>Protected Project</h2>
+            <p>Please enter the password to view this project:</p>
+            <div class="password-input-container">
+                <input type="password" id="project-password" />
+                <button type="button" class="toggle-password" aria-label="Toggle password visibility" onclick="togglePassword()">
+                    <span class="eye-icon">🙈</span>
+                </button>
             </div>
-        </div>
-
-        <!-- 3D model viewer -->
-        <div class="viewer-container">
-            <iframe 
-                class="model-viewer"
-                src="https://lumalabs.ai/embed/780d9d0b-41b7-40d5-b714-45260e691bfa?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=true&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" 
-                frameborder="0" 
-                title="luma embed">
-            </iframe>
-        </div>
-
-        <!-- Image gallery section -->
-        <div class="update-gallery">
-            <div class="build-info">
-                <h2>Gallery</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="../../../images/updates/house1/2024-03-22/RoofAngle.jpeg" alt="Frame Installation - Front View">
-                        <h3 class="gallery-title">Roof - Side View</h3>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="../../../images/updates/house1/2024-03-22/angle2.jpg" alt="Frame Installation - Side View">
-                        <h3 class="gallery-title">Frame Installation - Side View</h3>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="../../../images/updates/house1/2024-03-22/angle3.jpg" alt="Frame Installation - Detail">
-                        <h3 class="gallery-title">Frame Installation - Detail</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>Created by Dracula Drones | Capturing Your Build After Dark</p>
-    </footer>
-
-    <!-- Lightbox overlay for enlarged images -->
-    <div class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <div class="lightbox-content">
-            <img src="" alt="">
-            <h3 class="lightbox-title"></h3>
+            <button onclick="checkPassword()">Submit</button>
+            <p id="password-error" class="error-message"></p>
         </div>
     </div>
 
-    <!-- Load JavaScript file -->
-    <script src="../../../scripts.js"></script>
+    <div id="protected-content" style="display: none;">
+        <!-- Header section with navigation -->
+        <header class="header-gothic">
+            <h1>123 Vampire Street</h1>
+            <!-- Main navigation menu -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li class="active"><a href="../../../houses.html">Houses</a></li>
+                    <li><a href="../../../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <!-- Timeline navigation for build updates -->
+            <nav class="timeline-nav">
+                <p class="timeline-label">Build Dates</p>
+                <ul>
+                    <li><a href="2024-03-15-foundation.html">March 15, 2024</a></li>
+                    <li class="active"><a href="2024-03-22-framing.html">March 22, 2024</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Main content with fade-in animation -->
+        <main class="fade-in">
+            <!-- Build information section -->
+            <div class="info-container">
+                <div class="build-info">
+                    <h2>Build Progress Update</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h3>Scan Date</h3>
+                            <p>March 22, 2024</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Construction Phase</h3>
+                            <p data-construction-phase>Frame Installation</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Next Milestone</h3>
+                            <p>Roof Installation - Expected April 5</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Weather Conditions</h3>
+                            <p>Partly Cloudy, 20°C</p>
+                        </div>
+                    </div>
+                    <div class="build-notes">
+                        <h3>Progress Notes</h3>
+                        <p>Frame installation completed ahead of schedule. Electrical and plumbing rough-in to begin next week. All materials for upcoming work have been delivered to site.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D model viewer -->
+            <div class="viewer-container">
+                <iframe 
+                    class="model-viewer"
+                    src="https://lumalabs.ai/embed/780d9d0b-41b7-40d5-b714-45260e691bfa?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=true&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" 
+                    frameborder="0" 
+                    title="luma embed">
+                </iframe>
+            </div>
+
+            <!-- Image gallery section -->
+            <div class="update-gallery">
+                <div class="build-info">
+                    <h2>Gallery</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="../../../images/updates/house1/2024-03-22/RoofAngle.jpeg" alt="Frame Installation - Front View">
+                            <h3 class="gallery-title">Roof - Side View</h3>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="../../../images/updates/house1/2024-03-22/angle2.jpg" alt="Frame Installation - Side View">
+                            <h3 class="gallery-title">Frame Installation - Side View</h3>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="../../../images/updates/house1/2024-03-22/angle3.jpg" alt="Frame Installation - Detail">
+                            <h3 class="gallery-title">Frame Installation - Detail</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Created by Dracula Drones | Capturing Your Build After Dark</p>
+        </footer>
+
+        <!-- Lightbox overlay for enlarged images -->
+        <div class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-content">
+                <img src="" alt="">
+                <h3 class="lightbox-title"></h3>
+                <button class="open-image-btn">Open Image in New Tab</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 

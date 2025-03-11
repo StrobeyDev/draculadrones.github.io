@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protected Project | Dracula Drones</title>
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <!-- Password overlay -->
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-container">
+            <h2>Protected Project</h2>
+            <p>Please enter the password to view this project:</p>
+            <div class="password-input-container">
+                <input type="password" id="project-password" />
+                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                    <span class="eye-icon">👁️</span>
+                </button>
+            </div>
+            <button onclick="checkPassword()">Submit</button>
+            <p id="password-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Main content (hidden until password entered) -->
+    <div id="protected-content" style="display: none;">
+        <!-- Regular update template content goes here -->
+    </div>
+</body>
+</html> 
