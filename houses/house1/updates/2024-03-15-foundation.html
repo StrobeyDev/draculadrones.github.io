@@ -20,13 +20,6 @@
     <!-- Load and check authorization first -->
     <script src="../../../js/config.js"></script>
     <script src="../../../js/password-protection.js"></script>
-    <script>
-        // Immediately hide content until authorization is verified
-        document.addEventListener('DOMContentLoaded', function() {
-            const content = document.getElementById('protected-content');
-            if (content) content.style.display = 'none';
-        });
-    </script>
     <script src="../../../scripts.js"></script>
 </head>
 <body>
@@ -36,7 +29,7 @@
         </div>
     </noscript>
     <!-- Password overlay -->
-    <div id="password-overlay" class="password-overlay">
+    <div id="password-overlay" class="password-overlay" style="display: none;">
         <div class="password-container">
             <h2>Access Required</h2>
             <p>Please enter the access key to view this project's updates.</p>
