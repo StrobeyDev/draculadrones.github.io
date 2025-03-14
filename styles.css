@@ -140,21 +140,6 @@ footer p {
     overflow: hidden;
 }
 
-.build-info::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg,
-        var(--blood-red) 0%,
-        var(--vampire-red) 50%,
-        var(--blood-red) 100%
-    );
-    box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
-}
-
 .build-info h2 {
     color: var(--blood-red);
     font-size: 1.8rem;
