@@ -25,8 +25,8 @@
     <!-- Password overlay -->
     <div id="password-overlay" class="password-overlay">
         <div class="password-container">
-            <h2>Protected Project</h2>
-            <p>Please enter the password to view this project:</p>
+            <h2>Access Required</h2>
+            <p>Please enter the access key to view this project's updates.</p>
             <div class="password-input-container">
                 <input type="password" id="project-password" />
                 <button type="button" class="toggle-password" aria-label="Toggle password visibility" onclick="togglePassword()">
@@ -34,7 +34,8 @@
                 </button>
             </div>
             <button onclick="checkPassword()">Submit</button>
-            <p id="password-error" class="error-message"></p>
+            <p id="password-error" class="error"></p>
+            <a href="../../../houses.html" class="back-button">← Back to Projects</a>
         </div>
     </div>
 

@@ -1399,3 +1399,25 @@ a:focus, button:focus {
     transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+.error {
+    color: var(--blood-red);
+    margin-top: 10px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--moonlight);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid var(--blood-red);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: var(--vampire-red);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
