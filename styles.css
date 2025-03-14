@@ -650,7 +650,7 @@ main {
     }
 }
 
-/* Add these styles for the drone cards */
+/* Add styles for the drone cards */
 .drone-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, 250px);  /* Auto-fit columns of 250px */
@@ -777,52 +777,6 @@ main {
 /* Update the Equipment section width */
 .about-card:last-child {  /* Equipment section */
     max-width: 1200px;  /* Increased from 1000px */
-}
-
-/* Clean up and simplify drone card styles - remove duplicates */
-.drone-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);  /* Auto-fit columns of 250px */
-    gap: 2rem;
-    justify-content: center;
-    margin: 1.5rem auto;
-    max-width: 1200px;  /* Limit maximum width */
-}
-
-.drone-card {
-    width: 250px;
-    background-color: var(--night-black);
-    border: 1px solid var(--blood-red);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.drone-card .img-container {
-    width: 200px;
-    height: 200px;
-    margin: 1rem auto;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--blood-red);
-}
-
-.drone-card .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-@media (max-width: 992px) {
-    .drone-cards {
-        grid-template-columns: repeat(2, 250px);  /* 2 columns on medium screens */
-    }
-}
-
-@media (max-width: 768px) {
-    .drone-cards {
-        grid-template-columns: 250px;  /* Single column on mobile */
-    }
 }
 
 /* Add styles for the drone info text */
@@ -1315,16 +1269,20 @@ a:focus, button:focus {
 
 /* Password Protection Styles */
 .password-overlay {
+    display: none;  /* Hidden by default, JavaScript will show if needed */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--night-black);
-    display: flex;
+    background-color: var(--night-black);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+}
+
+#protected-content {
+    display: none;  /* Hidden by default, JavaScript will show if authorized */
 }
 
 .password-container {
