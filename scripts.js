@@ -5,62 +5,119 @@
 
 // When the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Fetch and update house statuses from JSON data
-    fetch('house.json')
-        .then(response => response.json())
-        .then(projects => {
-            // For each house in the data
-            Object.keys(projects).forEach(projectId => {
-                // Fetch the specific house's data
-                fetch(projects[projectId].path)
-                    .then(response => response.json())
-                    .then(projectData => {
-                        // Find the card element for this house
+    // Only try to fetch house status if we're on the houses page
+    const houseCards = document.querySelectorAll('.house-card');
+    if (houseCards.length > 0) {
+        try {
+            // Use relative path from current page
+            const housePath = window.location.pathname.includes('houses/') ? '../../../house.json' : 'house.json';
+            fetch(housePath)
+                .then(response => response.json())
+                .then(projects => {
+                    Object.keys(projects).forEach(projectId => {
                         const card = document.querySelector(`#${projectId}`);
                         if (card) {
-                            // Update the status text
                             const statusElement = card.querySelector('.house-status');
                             if (statusElement) {
-                                statusElement.textContent = `Status: ${projectData.currentPhase}`;
+                                // Set a default status while loading
+                                statusElement.textContent = 'Status: Loading...';
                             }
-                            
-                            // Update all links in the card
-                            const links = card.querySelectorAll('a');
-                            links.forEach(link => {
-                                if (link.classList.contains('house-image-link') || 
-                                    link.classList.contains('view-house')) {
-                                    link.href = `houses/${projectId}/updates/${projectData.latestUpdate}`;
-                                }
-                            });
                         }
                     });
-            });
-        })
-        // If there's an error loading the data
-        .catch(error => {
-            console.error('Error loading house statuses:', error);
-            const statusElements = document.querySelectorAll('.house-status');
-            statusElements.forEach(el => {
-                el.textContent = 'Status: Error loading';
-            });
+                })
+                .catch(error => {
+                    console.error('Error loading house statuses:', error);
+                    const statusElements = document.querySelectorAll('.house-status');
+                    statusElements.forEach(el => {
+                        el.textContent = 'Status: Error loading';
+                    });
+                });
+        } catch (error) {
+            console.error('Error in house status update:', error);
+        }
+    }
+
+    // Lightbox functionality
+    initializeLightbox();
+
+    // Typing animation reset - only run on pages with tagline
+    const tagline = document.querySelector('.tagline');
+    if (tagline) {
+        tagline.addEventListener('animationend', function(e) {
+            if (e.animationName === 'typing') {
+                setTimeout(() => {
+                    tagline.style.animation = 'none';
+                    tagline.offsetHeight; // Trigger reflow
+                    tagline.style.animation = null;
+                }, 4000);
+            }
         });
+    }
 });
 
-/**
- * Image Gallery Lightbox Functionality
- * - Opens images in a modal overlay
- * - Displays image title
- * - Provides full-size image access
- * - Closes on overlay/X click
- * - Navigate between images with prev/next buttons
- */
-document.addEventListener('DOMContentLoaded', function() {
+function initializeLightbox() {
+    // Create lightbox structure if it doesn't exist
+    let lightbox = document.querySelector('.lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        
+        // Create lightbox content container
+        const content = document.createElement('div');
+        content.className = 'lightbox-content';
+        
+        // Create header
+        const header = document.createElement('div');
+        header.className = 'lightbox-header';
+        
+        const title = document.createElement('h3');
+        title.className = 'lightbox-title';
+        
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'button-container';
+        
+        // Create both buttons the exact same way
+        const downloadImageBtn = document.createElement('button');
+        downloadImageBtn.className = 'download-image-btn';
+        downloadImageBtn.textContent = 'Download';
+        
+        // Recreate the open button to match download button exactly
+        const openImageBtn = document.createElement('button');
+        openImageBtn.className = 'download-image-btn open-in-tab-btn'; // Add second class for identification
+        openImageBtn.textContent = 'Open in New Tab';
+        
+        buttonContainer.appendChild(downloadImageBtn);
+        buttonContainer.appendChild(openImageBtn);
+        
+        header.appendChild(title);
+        header.appendChild(buttonContainer);
+        
+        // Create image container
+        const img = document.createElement('img');
+        img.className = 'lightbox-image';
+        
+        // Create close button
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'lightbox-close';
+        closeBtn.innerHTML = '×';
+        closeBtn.setAttribute('aria-label', 'Close lightbox');
+        
+        // Assemble the lightbox
+        content.appendChild(header);
+        content.appendChild(img);
+        lightbox.appendChild(content);
+        lightbox.appendChild(closeBtn);
+        
+        // Add to document
+        document.body.appendChild(lightbox);
+    }
+
     // Get references to lightbox elements
-    const lightbox = document.querySelector('.lightbox');
-    const lightboxImg = lightbox.querySelector('img');
+    const lightboxImg = lightbox.querySelector('.lightbox-image');
     const lightboxClose = lightbox.querySelector('.lightbox-close');
     const lightboxTitle = lightbox.querySelector('.lightbox-title');
-    const openImageBtn = lightbox.querySelector('.open-image-btn');
+    const openImageBtn = lightbox.querySelector('.open-in-tab-btn');
+    const downloadImageBtn = lightbox.querySelector('.download-image-btn:not(.open-in-tab-btn)');
 
     // Create navigation buttons
     const prevButton = document.createElement('button');
@@ -81,93 +138,93 @@ document.addEventListener('DOMContentLoaded', function() {
     let galleryItems = [];
     let currentIndex = 0;
 
-    // Update lightbox content
+    // Update lightbox content with null checks
     function updateLightboxContent(index) {
+        if (!galleryItems[index]) return;
+        
         const item = galleryItems[index];
         const img = item.querySelector('img');
         const title = item.querySelector('.gallery-title');
         
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightboxTitle.textContent = title.textContent;
-        openImageBtn.onclick = () => window.open(img.src, '_blank');
+        if (lightboxImg && img) {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+        }
         
-        // Update button states
-        prevButton.style.display = index === 0 ? 'none' : 'flex';
-        nextButton.style.display = index === galleryItems.length - 1 ? 'none' : 'flex';
+        if (lightboxTitle) {
+            lightboxTitle.textContent = title ? title.textContent : '';
+        }
+        
+        if (openImageBtn && img) {
+            openImageBtn.onclick = () => window.open(img.src, '_blank');
+        }
+        
+        if (downloadImageBtn && img) {
+            downloadImageBtn.onclick = () => {
+                const link = document.createElement('a');
+                link.href = img.src;
+                const fileName = img.src.split('/').pop() || 'image.jpg';
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+        }
+        
+        if (prevButton) {
+            prevButton.style.display = index === 0 ? 'none' : 'flex';
+        }
+        
+        if (nextButton) {
+            nextButton.style.display = index === galleryItems.length - 1 ? 'none' : 'flex';
+        }
     }
 
-    // Add click handlers to all gallery images
-    document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        galleryItems.push(item);
-        item.addEventListener('click', () => {
-            currentIndex = index;
-            updateLightboxContent(currentIndex);
-            lightbox.classList.add('active');
+    // Only set up gallery if there are gallery items
+    const galleryImages = document.querySelectorAll('.gallery-item');
+    if (galleryImages.length > 0) {
+        galleryImages.forEach((item, index) => {
+            galleryItems.push(item);
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                updateLightboxContent(currentIndex);
+                lightbox.classList.add('active');
+            });
         });
-    });
+    }
 
-    // Navigation button click handlers
-    prevButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateLightboxContent(currentIndex);
-        }
-    });
+    // Event listeners with null checks
+    if (prevButton) {
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateLightboxContent(currentIndex);
+            }
+        });
+    }
 
-    nextButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (currentIndex < galleryItems.length - 1) {
-            currentIndex++;
-            updateLightboxContent(currentIndex);
-        }
-    });
+    if (nextButton) {
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex < galleryItems.length - 1) {
+                currentIndex++;
+                updateLightboxContent(currentIndex);
+            }
+        });
+    }
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        
-        if (e.key === 'ArrowLeft' && currentIndex > 0) {
-            currentIndex--;
-            updateLightboxContent(currentIndex);
-        }
-        else if (e.key === 'ArrowRight' && currentIndex < galleryItems.length - 1) {
-            currentIndex++;
-            updateLightboxContent(currentIndex);
-        }
-        else if (e.key === 'Escape') {
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', () => {
             lightbox.classList.remove('active');
-        }
-    });
+        });
+    }
 
-    // Close lightbox when clicking the X button
-    lightboxClose.addEventListener('click', () => {
-        lightbox.classList.remove('active');
-    });
-
-    // Close lightbox when clicking outside the image
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
-        }
-    });
-});
-
-/**
- * Typing Animation Reset
- * Resets the tagline typing animation every 4 seconds
- * for continuous effect on the homepage
- */
-document.addEventListener('DOMContentLoaded', function() {
-    const tagline = document.querySelector('.tagline');
-    tagline.addEventListener('animationend', function(e) {
-        if (e.animationName === 'typing') {
-            setTimeout(() => {
-                tagline.style.animation = 'none';
-                tagline.offsetHeight; // Trigger reflow
-                tagline.style.animation = null;
-            }, 4000); // Wait 4 seconds before restarting
-        }
-    });
-}); 
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    }
+} 
