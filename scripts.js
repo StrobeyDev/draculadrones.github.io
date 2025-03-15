@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
  * - Displays image title
  * - Provides full-size image access
  * - Closes on overlay/X click
+ * - Navigate between images with prev/next buttons
  */
 document.addEventListener('DOMContentLoaded', function() {
     // Get references to lightbox elements
@@ -61,21 +62,83 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxTitle = lightbox.querySelector('.lightbox-title');
     const openImageBtn = lightbox.querySelector('.open-image-btn');
 
+    // Create navigation buttons
+    const prevButton = document.createElement('button');
+    prevButton.className = 'lightbox-nav lightbox-prev';
+    prevButton.innerHTML = '←';
+    prevButton.setAttribute('aria-label', 'Previous image');
+
+    const nextButton = document.createElement('button');
+    nextButton.className = 'lightbox-nav lightbox-next';
+    nextButton.innerHTML = '→';
+    nextButton.setAttribute('aria-label', 'Next image');
+
+    // Add navigation buttons to lightbox
+    lightbox.appendChild(prevButton);
+    lightbox.appendChild(nextButton);
+
+    // Store all gallery items and current index
+    let galleryItems = [];
+    let currentIndex = 0;
+
+    // Update lightbox content
+    function updateLightboxContent(index) {
+        const item = galleryItems[index];
+        const img = item.querySelector('img');
+        const title = item.querySelector('.gallery-title');
+        
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxTitle.textContent = title.textContent;
+        openImageBtn.onclick = () => window.open(img.src, '_blank');
+        
+        // Update button states
+        prevButton.style.display = index === 0 ? 'none' : 'flex';
+        nextButton.style.display = index === galleryItems.length - 1 ? 'none' : 'flex';
+    }
+
     // Add click handlers to all gallery images
-    document.querySelectorAll('.gallery-item').forEach(item => {
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+        galleryItems.push(item);
         item.addEventListener('click', () => {
-            // Get the clicked image's source and alt text
-            const imgSrc = item.querySelector('img').src;
-            const imgAlt = item.querySelector('img').alt;
-            const imgTitle = item.querySelector('.gallery-title').textContent;
-            // Update and show the lightbox
-            lightboxImg.src = imgSrc;
-            lightboxImg.alt = imgAlt;
-            lightboxTitle.textContent = imgTitle;
+            currentIndex = index;
+            updateLightboxContent(currentIndex);
             lightbox.classList.add('active');
-            // Update the open in new tab button
-            openImageBtn.onclick = () => window.open(imgSrc, '_blank');
         });
+    });
+
+    // Navigation button click handlers
+    prevButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateLightboxContent(currentIndex);
+        }
+    });
+
+    nextButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentIndex < galleryItems.length - 1) {
+            currentIndex++;
+            updateLightboxContent(currentIndex);
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'ArrowLeft' && currentIndex > 0) {
+            currentIndex--;
+            updateLightboxContent(currentIndex);
+        }
+        else if (e.key === 'ArrowRight' && currentIndex < galleryItems.length - 1) {
+            currentIndex++;
+            updateLightboxContent(currentIndex);
+        }
+        else if (e.key === 'Escape') {
+            lightbox.classList.remove('active');
+        }
     });
 
     // Close lightbox when clicking the X button

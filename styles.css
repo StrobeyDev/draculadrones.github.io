@@ -1207,8 +1207,9 @@ a:focus, button:focus {
 
 .lightbox-content {
     position: relative;
-    max-width: 90%;
+    max-width: calc(90% - 140px); /* Account for larger nav buttons */
     max-height: 90vh;
+    margin: 0 70px; /* Add margin for nav buttons */
 }
 
 .lightbox-header {
@@ -1491,4 +1492,70 @@ a:focus, button:focus {
     margin-right: auto;
     padding: 2 1rem;
     box-sizing: border-box;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--night-black);
+    color: var(--moonlight);
+    border: 1px solid var(--blood-red);
+    width: 44px;
+    height: 160px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.8rem;
+    z-index: 1001;
+    padding: 0;
+    line-height: 0;
+}
+
+.lightbox-nav:hover {
+    background: var(--blood-red);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
+}
+
+.lightbox-nav span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin-top: -2px;
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+@media (max-width: 768px) {
+    .lightbox-nav {
+        width: 36px;
+        height: 128px;
+        font-size: 1.5rem;
+        border-radius: 6px;
+    }
+
+    .lightbox-prev {
+        left: 10px;
+    }
+
+    .lightbox-next {
+        right: 10px;
+    }
+
+    .lightbox-content {
+        max-width: calc(90% - 92px);
+        margin: 0 46px;
+    }
 }
