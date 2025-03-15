@@ -300,6 +300,8 @@ main {
     width: 100%;
     max-width: 892px;
     margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .main-nav ul {
@@ -310,6 +312,7 @@ main {
     margin: 1rem auto;
     padding: 0;
     max-width: 892px;
+    width: 100%;
 }
 
 .main-nav li {
@@ -362,14 +365,20 @@ main {
 }
 
 @media (max-width: 576px) {
+    .main-nav {
+        padding: 0 0.5rem;
+    }
+    
     .main-nav ul {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        width: 100%;
     }
     
     .main-nav li {
-        width: 200px;
+        width: 100%;
+        max-width: 200px;
         text-align: center;
     }
 }
@@ -384,12 +393,13 @@ main {
     background: linear-gradient(180deg, 
                 var(--vampire-red) 0%,
                 var(--night-black) 100%);
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem;  /* Fix padding to be consistent */
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
     width: 100%;
+    box-sizing: border-box;  /* Add box-sizing to include padding */
 }
 
 .header-gothic::before {
@@ -1490,7 +1500,7 @@ a:focus, button:focus {
     max-width: 892px;
     margin-left: auto;
     margin-right: auto;
-    padding: 2 1rem;
+    padding: 1 1rem;  /* Fix the padding syntax and add consistent padding */
     box-sizing: border-box;
 }
 
@@ -1565,5 +1575,16 @@ a:focus, button:focus {
         width: 36px;
         height: 36px;
         font-size: 20px;
+    }
+}
+
+/* Update mobile styles */
+@media (max-width: 576px) {
+    .header-gothic {
+        padding: 1.5rem 0.5rem;  /* Slightly reduce padding on mobile */
+    }
+    
+    .header-gothic > * {
+        padding: 1 0.5rem;
     }
 }
