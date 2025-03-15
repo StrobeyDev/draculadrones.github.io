@@ -1179,21 +1179,6 @@ a:focus, button:focus {
     transition: all 0.3s ease-out;  /* Only animate when opening */
 }
 
-/* Close button styling */
-.lightbox-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: var(--moonlight);
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.lightbox-close:hover {
-    color: var(--blood-red);
-}
-
 .gallery-title {
     color: var(--moonlight);
     font-size: 0.9rem;
@@ -1250,14 +1235,29 @@ a:focus, button:focus {
 
 .lightbox-close {
     position: absolute;
-    top: -40px;
-    right: 0;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--night-black);
     color: var(--moonlight);
-    font-size: 2rem;
+    border: 1px solid var(--blood-red);
+    border-radius: 4px;
     cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    transition: all 0.3s ease;
+    z-index: 1002;
+    padding: 0;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    background: var(--blood-red);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.3);
 }
 
 /* View Progress button styling */
@@ -1557,5 +1557,13 @@ a:focus, button:focus {
     .lightbox-content {
         max-width: calc(90% - 92px);
         margin: 0 46px;
+    }
+
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
     }
 }
