@@ -14,15 +14,32 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(housePath)
                 .then(response => response.json())
                 .then(projects => {
+                    // For each house, fetch its specific status file
                     Object.keys(projects).forEach(projectId => {
                         const card = document.querySelector(`#${projectId}`);
-                        if (card) {
-                            const statusElement = card.querySelector('.house-status');
-                            if (statusElement) {
-                                // Update with actual status from projects data
-                                const status = projects[projectId].status;
-                                statusElement.innerHTML = `Status: ${status} 🩸`; // Add back the blood droplet
-                            }
+                        if (card && projects[projectId].path) {
+                            // Convert the path to be relative to current location
+                            const statusPath = window.location.pathname.includes('houses/') 
+                                ? `../../../${projects[projectId].path}`
+                                : projects[projectId].path;
+                            
+                            // Fetch the house-specific status
+                            fetch(statusPath)
+                                .then(response => response.json())
+                                .then(houseData => {
+                                    const statusElement = card.querySelector('.house-status');
+                                    if (statusElement) {
+                                        const status = houseData.currentPhase;
+                                        statusElement.innerHTML = status ? `Status: ${status}` : 'Status: Not Available 🩸';
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(`Error loading status for ${projectId}:`, error);
+                                    const statusElement = card.querySelector('.house-status');
+                                    if (statusElement) {
+                                        statusElement.textContent = 'Status: Error loading';
+                                    }
+                                });
                         }
                     });
                 })
