@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (card) {
                             const statusElement = card.querySelector('.house-status');
                             if (statusElement) {
-                                // Set a default status while loading
-                                statusElement.textContent = 'Status: Loading...';
+                                // Update with actual status from projects data
+                                const status = projects[projectId].status;
+                                statusElement.innerHTML = `Status: ${status} 🩸`; // Add back the blood droplet
                             }
                         }
                     });
