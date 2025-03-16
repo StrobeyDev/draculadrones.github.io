@@ -227,4 +227,28 @@ function initializeLightbox() {
             }
         });
     }
+}
+
+function updateLightboxContent(imageSrc, title) {
+    // ... existing code ...
+
+    // Update the download button to trigger a download
+    const downloadBtn = document.querySelector('.download-image-btn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Create a temporary anchor element
+            const link = document.createElement('a');
+            link.href = imageSrc;
+            link.download = title || 'image'; // Use the title as filename, or 'image' if no title
+            
+            // Programmatically click the link to trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
+
+    // ... existing code ...
 } 
