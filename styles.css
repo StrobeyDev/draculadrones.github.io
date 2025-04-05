@@ -1769,3 +1769,18 @@ a:focus, button:focus {
         max-height: calc(100vh - 260px); /* Slightly adjust for smaller screens */
     }
 }
+
+.logo-image {
+    width: 100%;
+    max-width: 600px; /* Adjust this value to match your desired logo size */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* For mobile screens */
+@media screen and (max-width: 768px) {
+    .logo-image {
+        max-width: 90%; /* Make logo slightly smaller on mobile */
+    }
+}
