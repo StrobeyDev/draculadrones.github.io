@@ -50,30 +50,37 @@
     <!-- Main content with fade-in animation -->
     <main class="fade-in">
         <!-- Build information section -->
-        <div class="info-container">
+        <div class="info-container info-container--gallery-bg" data-gallery-interval="5000">
             <div class="build-info">
-                <h2>House Status</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h3>Scan Date</h3>
-                        <p>April 6, 2025</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Construction Phase</h3>
-                        <p data-construction-phase>Preventive</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Next Milestone</h3>
-                        <p>N/A - Expected N/A</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Weather Conditions</h3>
-                        <p>Mostly Sunny, 46°F</p>
-                    </div>
+                <div class="build-info-bg" aria-hidden="true">
+                    <div class="build-info-bg-layer build-info-bg-layer--active"></div>
+                    <div class="build-info-bg-layer"></div>
+                    <div class="build-info-bg-overlay"></div>
                 </div>
-                <div class="build-notes">
-                    <h3>Progress Notes</h3>
-                    <p>House is already completed.</p>
+                <div class="build-info-content">
+                    <h2>House Status</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h3>Scan Date</h3>
+                            <p>April 6, 2025</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Construction Phase</h3>
+                            <p data-construction-phase>Preventive</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Next Milestone</h3>
+                            <p>N/A - Expected N/A</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Weather Conditions</h3>
+                            <p>Mostly Sunny, 46°F</p>
+                        </div>
+                    </div>
+                    <div class="build-notes">
+                        <h3>Progress Notes</h3>
+                        <p>House is already completed.</p>
+                    </div>
                 </div>
             </div>
         </div>
