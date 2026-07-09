@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Lightbox functionality
     initializeLightbox();
 
+    // Cycling gallery background for build info sections
+    initializeGalleryBackground();
+
     // Typing animation reset - only run on pages with tagline
     const tagline = document.querySelector('.tagline');
     if (tagline) {
@@ -72,6 +75,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function initializeGalleryBackground() {
+    const container = document.querySelector('.info-container--gallery-bg');
+    if (!container) return;
+
+    const galleryImages = document.querySelectorAll('.gallery-grid .gallery-item img');
+    if (galleryImages.length === 0) return;
+
+    const images = Array.from(galleryImages, img => img.src);
+    const interval = parseInt(container.dataset.galleryInterval, 10) || 30000;
+    const layers = container.querySelectorAll('.build-info-bg-layer');
+
+    if (layers.length < 2) return;
+
+    images.forEach(src => {
+        const preload = new Image();
+        preload.src = src;
+    });
+
+    let currentIndex = 0;
+    let activeLayer = 0;
+
+    layers[0].style.backgroundImage = `url("${images[0]}")`;
+    layers[0].classList.add('build-info-bg-layer--active');
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        const nextLayer = 1 - activeLayer;
+
+        layers[nextLayer].style.backgroundImage = `url("${images[currentIndex]}")`;
+        layers[nextLayer].classList.add('build-info-bg-layer--active');
+        layers[activeLayer].classList.remove('build-info-bg-layer--active');
+
+        activeLayer = nextLayer;
+    }, interval);
+}
 
 function initializeLightbox() {
     // Create lightbox structure if it doesn't exist
